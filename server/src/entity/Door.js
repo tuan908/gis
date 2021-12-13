@@ -1,9 +1,9 @@
 import { Schema, Model } from 'mongoose';
 
 const DoorSchema = new Schema({
-  id: Number,
   altitude: Number,
-  coordinates: Array,
+  rings: Array,
+  bid: String
 });
 
 const Door = Model('Door', DoorSchema);

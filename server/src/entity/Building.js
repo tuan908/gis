@@ -1,10 +1,10 @@
 import { Schema, Model } from 'mongoose';
 
 const BuildingSchema = new Schema({
-  id: Number,
   name: String,
   height: Number,
   floorCount: Number,
+  lineCount: Number,
   buildingArea: Number,
   yearBuilt: String,
 });

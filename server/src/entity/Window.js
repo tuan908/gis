@@ -1,9 +1,9 @@
 import { Model, Schema } from 'mongoose';
 
 const WindowSchema = new Schema({
-  id: Number,
   altitude: Number,
-  coordinates: Array,
+  rings: Array,
+  bid: String
 });
 
 const Window = Model('Window', WindowSchema);

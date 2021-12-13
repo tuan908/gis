@@ -1,9 +1,9 @@
 import { Schema, Model } from 'mongoose';
 
 const BaseSchema = new Schema({
-  id: Number,
   altitude: Number,
   coordinates: Array,
+  bid: String
 });
 
 const Base = Model('Base', BaseSchema);

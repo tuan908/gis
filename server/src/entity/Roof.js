@@ -1,9 +1,9 @@
 import { Schema, Model } from 'mongoose';
 
 const RoofSchema = new Schema({
-  id: Number,
   altitude: Number,
-  coordinates: Array,
+  rings: Array,
+  bid: String
 });
 
 const Roof = Model('Roof', RoofSchema);
