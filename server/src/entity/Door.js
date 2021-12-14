@@ -1,10 +1,10 @@
-import { Schema, Model } from 'mongoose';
+import mongoose from 'mongoose';
 
-const DoorSchema = new Schema({
+const DoorSchema = new mongoose.Schema({
   altitude: Number,
   rings: Array,
   bid: String
 });
 
-const Door = Model('Door', DoorSchema);
+const Door = mongoose.model('Door', DoorSchema);
 export default Door;

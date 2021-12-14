@@ -1,10 +1,10 @@
-import { Schema, Model } from 'mongoose';
+import mongoose from 'mongoose';
 
-const BaseSchema = new Schema({
+const BaseSchema = new mongoose.Schema({
   altitude: Number,
-  coordinates: Array,
+  rings: Array,
   bid: String
 });
 
-const Base = Model('Base', BaseSchema);
+const Base = mongoose.model('Base', BaseSchema);
 export default Base;

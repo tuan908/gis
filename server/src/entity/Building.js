@@ -1,6 +1,6 @@
-import { Schema, Model } from 'mongoose';
+import mongoose from 'mongoose';
 
-const BuildingSchema = new Schema({
+const BuildingSchema = new mongoose.Schema({
   name: String,
   height: Number,
   floorCount: Number,
@@ -9,6 +9,6 @@ const BuildingSchema = new Schema({
   yearBuilt: String,
 });
 
-const Building = Model('Building', BuildingSchema);
+const Building = mongoose.model('Building', BuildingSchema);
 
 export default Building;
