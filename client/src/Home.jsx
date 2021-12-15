@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Map from '@arcgis/core/Map';
 import SceneView from '@arcgis/core/views/SceneView';
 import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
@@ -35,6 +35,7 @@ import {
   floorSymbol,
   lineSymbol,
 } from './resources';
+import { getData } from './api/api';
 
 const Home = () => {
   const mapDiv = useRef(null);
@@ -140,7 +141,11 @@ const Home = () => {
     }
   }, []);
 
-  return <div className="mapDiv" ref={mapDiv}></div>;
+  return (
+    <>
+      <div className="mapDiv" ref={mapDiv}></div>
+    </>
+  );
 };
 
 export default Home;
