@@ -62,7 +62,7 @@ const lineNumber = 6
 
 let baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic;
 
-let b1 = { ringNumber, lineNumber, baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic, base, roof, floor, wall, line }
+const b1 = { ringNumber, lineNumber, baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic, base, roof, floor, wall, line }
 
 // let b1 = fetchBuilding();
 // console.log(b1.res)

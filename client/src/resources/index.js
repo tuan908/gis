@@ -47,7 +47,7 @@ export {
   c6,
   d5,
   c5,
-  b1, fetchBuilding,
+  b1,
   ba1,
   ba2,
   b3,

@@ -12,15 +12,20 @@ export default {
       let bds = await Building.find();
       if(bds) {
         bds.forEach( async bd => {
-          let base = await Base.findOne({ bid: bd._id });
-          if(base) {
-            let floor = renderFloor(base.rings.length - 1, base.rings)
-            let wall = renderWall(base.rings.length - 1, base.rings)
-            let line = renderLine(bd.lineCount - 2, base.rings.length - 1, base.rings)
-            let ringNumber = base.rings.length - 1
-            let lineNumber = bd.lineCount
-            let baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic
-            buildings.push({ ringNumber, lineNumber, baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic, base, floor, wall, line })
+          let b = await Base.findOne({ bid: bd._id });
+          if(b) {
+            let r = await Roof.findOne({ bid: bd._id })
+            if(r) {
+              let base = { type: 'polygon', rings: b.rings }
+              let roof = { type: 'polygon', rings: r.rings }
+              let floor = renderFloor(base.rings.length - 1, base.rings)
+              let wall = renderWall(base.rings.length - 1, base.rings, bd.height)
+              let line = renderLine(bd.lineCount - 2, base.rings.length - 1, base.rings)
+              let ringNumber = base.rings.length - 1
+              let lineNumber = bd.lineCount
+              let baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic
+              buildings.push({ ringNumber, lineNumber, baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic, base, roof, floor, wall, line })
+            }
           }
 
           if(bds.indexOf(bd) === bds.length - 1) return res.status(200).json(buildings);
