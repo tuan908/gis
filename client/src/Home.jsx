@@ -13,7 +13,7 @@ import {
   f2,
   g1,
   c3,
-  b1,
+  b1, fetchBuilding,
   b3,
   b4,
   b5,
@@ -39,7 +39,8 @@ import {
 const Home = () => {
   const mapDiv = useRef(null);
 
-  useEffect(() => {
+  useEffect( async () => {
+    // let b1 = fetchBuilding()
     if (mapDiv.current) {
       const buildings = [
         e1,
@@ -69,6 +70,7 @@ const Home = () => {
         c1,
       ];
 
+      console.log(b1)
       const map = new Map({
         basemap: 'hybrid',
       });
@@ -138,7 +140,7 @@ const Home = () => {
         }
       });
     }
-  }, []);
+  }, [b1]);
 
   return <div className="mapDiv" ref={mapDiv}></div>;
 };

@@ -3,17 +3,33 @@ import Building from './entity/Building.js';
 import Door from './entity/Door.js';
 import Roof from './entity/Roof.js';
 import Window from './entity/Window.js';
+import { renderFloor, renderWall, renderLine, renderWindow } from "./util.js"
 
 export default {
-  getBuildingById: async (req, res, next) => {
+  getBuildings: async (req, res, next) => {
     try {
-      let { id } = req.query;
-      let bd = await Building.findOne({ _id: id });
-      return res.status(200).json(bd);
+      const buildings = [];
+      let bds = await Building.find();
+      if(bds) {
+        bds.forEach( async bd => {
+          let base = await Base.findOne({ bid: bd._id });
+          if(base) {
+            let floor = renderFloor(base.rings.length - 1, base.rings)
+            let wall = renderWall(base.rings.length - 1, base.rings)
+            let line = renderLine(bd.lineCount - 2, base.rings.length - 1, base.rings)
+            let ringNumber = base.rings.length - 1
+            let lineNumber = bd.lineCount
+            let baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic
+            buildings.push({ ringNumber, lineNumber, baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic, base, floor, wall, line })
+          }
+
+          if(bds.indexOf(bd) === bds.length - 1) return res.status(200).json(buildings);
+        })
+      }
     } catch (e) {
       return res.status(500).json({
         statusCode: 500,
-        message: `Some errors occur while finding receiving forms list`,
+        message: `Some errors occur while finding receiving forms building list`,
       });
     }
   },

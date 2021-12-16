@@ -14,7 +14,7 @@ import { c6 } from './c6.js';
 import { d5 } from './d5.js';
 import { c5 } from './c5.js';
 
-import { b1 } from './b1.js';
+import { b1, fetchBuilding } from './b1.js';
 import { ba1 } from './ba1.js';
 import { ba2 } from './ba2.js';
 import { b4 } from './b4.js';
@@ -47,7 +47,7 @@ export {
   c6,
   d5,
   c5,
-  b1,
+  b1, fetchBuilding,
   ba1,
   ba2,
   b3,
