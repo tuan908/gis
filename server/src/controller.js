@@ -3,29 +3,63 @@ import Building from './entity/Building.js';
 import Door from './entity/Door.js';
 import Roof from './entity/Roof.js';
 import Window from './entity/Window.js';
-import { renderFloor, renderWall, renderLine, renderWindow } from "./util.js"
+import { renderFloor, renderWall, renderLine, renderWindow } from './util.js';
 
 export default {
   getBuildings: async (req, res, next) => {
     try {
       const buildings = [];
       let bds = await Building.find();
-      if(bds) {
-        for(let i = 0; i <= bds.length; i++) {
-          if(i === bds.length) return res.status(200).json(buildings);
+      if (bds) {
+        for (let i = 0; i <= bds.length; i++) {
+          if (i === bds.length) return res.status(200).json(buildings);
           let b = await Base.findOne({ bid: bds[i]._id });
-          if(b) {
-            let r = await Roof.findOne({ bid: bds[i]._id })
-            if(r) {
-              let base = { type: 'polygon', rings: b.rings }
-              let roof = { type: 'polygon', rings: r.rings }
-              let floor = renderFloor(base.rings.length - 1, base.rings)
-              let wall = renderWall(base.rings.length - 1, base.rings, bds[i].height)
-              let line = renderLine(bds[i].lineCount - 2, base.rings.length - 1, base.rings)
-              let ringNumber = base.rings.length - 1
-              let lineNumber = bds[i].lineCount
-              let baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic
-              buildings.push({ ringNumber, lineNumber, baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic, base, roof, floor, wall, line })
+          if (b) {
+            let r = await Roof.findOne({ bid: bds[i]._id });
+            if (r) {
+              let base = { type: 'polygon', rings: b.rings };
+              let roof = { type: 'polygon', rings: r.rings };
+              let floor = renderFloor(base.rings.length - 1, base.rings);
+              let wall = renderWall(
+                base.rings.length - 1,
+                base.rings,
+                bds[i].height
+              );
+              let line = renderLine(
+                bds[i].lineCount - 2,
+                base.rings.length - 1,
+                base.rings
+              );
+              let ringNumber = base.rings.length - 1;
+              let lineNumber = bds[i].lineCount;
+              let baseGraphic,
+                roofGraphic,
+                floorGraphic,
+                wallGraphic,
+                lineGraphic;
+              const name = bds[i].name;
+              const height = bds[i].height;
+              const area = bds[i].buildingArea;
+              const year = bds[i].yearBuilt;
+
+              buildings.push({
+                name,
+                height,
+                area,
+                year,
+                ringNumber,
+                lineNumber,
+                baseGraphic,
+                roofGraphic,
+                floorGraphic,
+                wallGraphic,
+                lineGraphic,
+                base,
+                roof,
+                floor,
+                wall,
+                line,
+              });
             }
           }
         }
@@ -90,6 +124,22 @@ export default {
         statusCode: 500,
         message:
           err.message || `Some errors occur while finding receiving forms list`,
+      });
+    }
+  },
+  getBuildingByName: async (req, res) => {
+    try {
+      let { name } = req.query;
+      const buildingName = name.toUpperCase();
+      let result = await Building.findOne({ name: buildingName });
+      console.log(result);
+      return res.status(200).json(result);
+    } catch (error) {
+      return res.status(500).json({
+        statusCode: 500,
+        message:
+          error.message ||
+          `Some errors occur while finding receiving forms list`,
       });
     }
   },

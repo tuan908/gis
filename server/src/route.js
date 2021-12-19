@@ -7,5 +7,6 @@ router.get('/getBaseByBid', controller.getBaseByBid);
 router.get('/getRoofByBid', controller.getRoofByBid);
 router.get('/getDoorByBid', controller.getDoorByBid);
 router.get('/getWindowByBid', controller.getWindowByBid);
+router.get('/getBuildingByName', controller.getBuildingByName);
 
 export default router;

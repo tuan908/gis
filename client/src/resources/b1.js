@@ -1,18 +1,5 @@
-import axios from "axios"
-import { renderFloor, renderWall, renderLine, renderWindow } from "./util.js"
-
-// let floor, wall, line
-const fetchBuilding = async () => {
-    let res = await axios.get("http://localhost:8080/getBuildingById?id=61b865db6ef5c86fbdfed83e")
-    
-        let { floor, line, wall } = res.data;
-        let ringNumber = 11
-        let lineNumber = 8
-        let baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic
-        return { ringNumber, lineNumber, baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic, base, roof, floor, wall, line }
-}
-
-// let { floor, wall, line } = fetchBuilding()
+import axios from 'axios';
+import { renderFloor, renderWall, renderLine, renderWindow } from './util.js';
 
 const base = {
   type: 'polygon',
@@ -58,12 +45,23 @@ const line = renderLine(6, 11, base.rings);
 
 const ringNumber = 11;
 
-const lineNumber = 6
+const lineNumber = 6;
 
 let baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic;
 
-const b1 = { ringNumber, lineNumber, baseGraphic, roofGraphic, floorGraphic, wallGraphic, lineGraphic, base, roof, floor, wall, line }
+const b1 = {
+  ringNumber,
+  lineNumber,
+  baseGraphic,
+  roofGraphic,
+  floorGraphic,
+  wallGraphic,
+  lineGraphic,
+  base,
+  roof,
+  floor,
+  wall,
+  line,
+};
 
-// let b1 = fetchBuilding();
-// console.log(b1.res)
-export { b1, fetchBuilding }
+export { b1 };
